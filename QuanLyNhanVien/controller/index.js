@@ -21,12 +21,13 @@ function renderGiaoDien() {
       currency: "VND",
     })}</td>
 <td>${xepLoaiNV}</td>
+
 <td><button onclick="xoaNhanVien('${
       nhanVien.taiKhoan
-    }')" class="btn btn-danger mr3"><i class="fa-solid fa-trash-can"></i></button>
+    }')" class="btn btn-danger mr3"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
 <button id="btnEdit" onclick="suaNhanVien('${
       nhanVien.taiKhoan
-    }')" class="btn btn-warning mr3"><i class="fa-solid fa-pencil"></i></button></td>
+    }')" class="btn btn-warning mr3" data-toggle="modal" data-target="#myModal" ><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
 </tr>`;
   }
 
@@ -126,8 +127,8 @@ function xoaNhanVien(taiKhoan) {
 function suaNhanVien(taiKhoan) {
   document.getElementById("btnThemNV").style.display = "none";
   document.getElementById("btnCapNhat").style.display = "block";
-  document.getElementById("header-title").innerHTML = "Cập nhật thông tin";
-  
+  document.getElementById("header-title").innerHTML = "Chỉnh sửa nhân viên";
+
   document.getElementById("password").type = "text";
 
   var index = timViTriNhanVien(taiKhoan);
@@ -143,8 +144,6 @@ function suaNhanVien(taiKhoan) {
     nhanVien.gioLam
   );
   document.getElementById("tknv").readOnly = true;
-
-  
 }
 
 function capNhapThongTinNV() {
@@ -153,6 +152,13 @@ function capNhapThongTinNV() {
   arrNhanVien[index] = nhanVienDaEdit;
 
   renderGiaoDien();
-  
+
 }
 document.getElementById("btnCapNhat").onclick = capNhapThongTinNV;
+
+function resetFrom() {
+  document.getElementById("tknv").readOnly = false;
+  document.getElementById("header-title").innerHTML = "Thêm nhân viên mới";
+  document.getElementById("btnThemNV").style.display = "block";
+  ganGiaTriInput("", "", "", "", "", "", "", "");
+}
