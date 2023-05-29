@@ -44,6 +44,14 @@ function layGiaTriInput() {
   var _chucVu = document.getElementById("chucvu").value;
   var _gioLam = document.getElementById("gioLam").value * 1;
 
+  // var valid = true;
+  // valid = 
+  // checkInput(_taiKhoan, "tbTK") ;
+  
+  // if (!valid){
+  //   return
+  // }
+
   var nhanVien = new NhanVien(
     _taiKhoan,
     _hoTen,
@@ -57,4 +65,12 @@ function layGiaTriInput() {
   return nhanVien;
 }
 
+//!  reset from 
+function resetFrom() {
+  document.getElementById("tknv").readOnly = false;
+  document.getElementById("header-title").innerHTML = "Thêm nhân viên mới";
+  document.getElementById("btnThemNV").style.display = "block";
+  document.getElementById("btnCapNhat").style.display = "none";
+  ganGiaTriInput("", "", "", "", "", "", "", "");
+}
 

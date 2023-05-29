@@ -156,9 +156,4 @@ function capNhapThongTinNV() {
 }
 document.getElementById("btnCapNhat").onclick = capNhapThongTinNV;
 
-function resetFrom() {
-  document.getElementById("tknv").readOnly = false;
-  document.getElementById("header-title").innerHTML = "Thêm nhân viên mới";
-  document.getElementById("btnThemNV").style.display = "block";
-  ganGiaTriInput("", "", "", "", "", "", "", "");
-}
+
