@@ -45,9 +45,9 @@ function layGiaTriInput() {
   var _gioLam = document.getElementById("gioLam").value * 1;
 
   // var valid = true;
-  // valid = 
+  // valid =
   // checkInput(_taiKhoan, "tbTK") ;
-  
+
   // if (!valid){
   //   return
   // }
@@ -65,7 +65,7 @@ function layGiaTriInput() {
   return nhanVien;
 }
 
-//!  reset from 
+//!  reset from
 function resetFrom() {
   document.getElementById("tknv").readOnly = false;
   document.getElementById("header-title").innerHTML = "Thêm nhân viên mới";
@@ -74,3 +74,10 @@ function resetFrom() {
   ganGiaTriInput("", "", "", "", "", "", "", "");
 }
 
+// lấy gtri localStorage lên
+function getStorage() {
+  var arrNhanVienLocal = JSON.parse(localStorage.getItem("arrNhanVien"));
+  if (arrNhanVienLocal != null) {
+    arrNhanVien = arrNhanVienLocal;
+  }
+}

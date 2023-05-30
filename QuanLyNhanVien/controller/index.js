@@ -1,10 +1,17 @@
 var arrNhanVien = [];
 
+getStorage();
+renderGiaoDien(getStorage);
+
 function renderGiaoDien() {
   var content = "";
 
   for (var i = 0; i < arrNhanVien.length; i++) {
-    var nhanVien = arrNhanVien[i];
+    var nhanVien = new NhanVien();
+    var nhanVienItem = arrNhanVien[i];
+    Object.assign(nhanVien, nhanVienItem)
+
+    // var nhanVien = arrNhanVien[i];
     var tongLuongNV = nhanVien.tinhTongLuong();
     var xepLoaiNV = nhanVien.xepLoai();
 
@@ -60,6 +67,8 @@ function themNhanVien() {
   // );
   var nhanVien = layGiaTriInput();
   arrNhanVien.push(nhanVien);
+
+  saveStorage(arrNhanVien);
   //   console.log(nhanVien)
   // render lên giao diện bằng mảng vưÀ thêm
   renderGiaoDien();
@@ -118,6 +127,7 @@ function xoaNhanVien(taiKhoan) {
   var index = timViTriNhanVien(taiKhoan);
   if (index != -1) {
     arrNhanVien.splice(index, 1);
+    saveStorage(arrNhanVien);
     renderGiaoDien();
   }
 }
@@ -150,10 +160,55 @@ function capNhapThongTinNV() {
   var nhanVienDaEdit = layGiaTriInput();
   var index = timViTriNhanVien(nhanVienDaEdit.taiKhoan);
   arrNhanVien[index] = nhanVienDaEdit;
-
+  
+  saveStorage(arrNhanVien);
   renderGiaoDien();
-
 }
-document.getElementById("btnCapNhat").onclick = capNhapThongTinNV;
 
+// tim nhan vien theo loai
+// document.getElementById("btnTimNV").onclick = function () {
+//   var nhanVienXepLoai = document.getElementById("searchName").value;
+//   arrLoaiNV = [];
+//   for (var i = 0; i < arrNhanVien.length; i++) {
+//     var nhanVienLoai = new NhanVien();
+//     var nhanVienItem = arrNhanVien[i];
+//     Object.assign(nhanVienLoai, nhanVienItem);
+//     if (nhanVienLoai.xepLoai() == nhanVienXepLoai) {
+//       arrLoaiNV.push(nhanVienLoai);
+//     } else if (nhanVienXepLoai == "") {
+//       console.log(arrLoaiNV);
+//     }
+//   }
+//   renderGiaoDien();
+// };
 
+// function timNhanVienXepLoai() {
+//   var nhanVienXepLoai = document.getElementById("searchName").value;
+//   var arrNVGioi = [];
+
+//   for (var i = 0; i < arrNhanVien.length; i++) {
+//     var nhanVienLoai = new NhanVien();
+
+//     var nhanVienItem = arrNhanVien[i];
+//     Object.assign(nhanVienLoai, nhanVienItem);
+//     var arrNhanVienXepLoai = nhanVienLoai.xepLoai().splice(/\s/);
+
+//     arrNhanVienXepLoai.splice(0, 2);
+//     arrtemp = arrNhanVienXepLoai.join("");
+
+//     if (arrtemp == nhanVienXepLoai) {
+//       arrNVGioi.push(nhanVienLoai);
+//       renderGiaoDien(arrNVGioi);
+//     } else if (nhanVienXepLoai == "") {
+//       renderGiaoDien(arrNhanVien);
+//     } else if (nhanVienLoai.xepLoai() == nhanVienXepLoai) {
+//       arrNVGioi.push(nhanVienLoai);
+//       renderGiaoDien(arrNVGioi);
+//     }
+//   }
+// };
+
+//! localStorage
+function saveStorage() {
+  localStorage.setItem("arrNhanVien", JSON.stringify(arrNhanVien));
+}
